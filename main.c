@@ -10,7 +10,7 @@
 int main(int argc, char **argv)
 {
 	int fd, len;
-	char buff[512];
+	char *buff;
 	FILE *f;
 	size_t size;
 
@@ -22,9 +22,12 @@ int main(int argc, char **argv)
 	fseek(f, 0, SEEK_END);
 	len = ftell(f);
 	fclose(f);
+	buff = malloc(len);
 	size = read(fd, buff, len);
+	close(fd);
 	size += 1;
 	printf("%s\n", buff);
+	free(buff);
 	return (0);
 	
 }
