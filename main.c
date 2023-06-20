@@ -10,10 +10,10 @@
 int main(int argc, char **argv)
 {
 	int fd, len;
-	char *buff;
+	char buff[512];
 	FILE *f;
-	
-	printf("hello");
+	size_t size;
+
 	if (argc != 2)
 		write(STDERR_FILENO, "USAGE: monty file\n", 18), exit(EXIT_FAILURE);
 	fd = open(argv[1], O_RDONLY);
@@ -22,7 +22,8 @@ int main(int argc, char **argv)
 	fseek(f, 0, SEEK_END);
 	len = ftell(f);
 	fclose(f);
-	read(fd, buff, len);
+	size = read(fd, buff, len);
+	size += 1;
 	printf("%s\n", buff);
 	return (0);
 	
