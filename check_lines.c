@@ -8,11 +8,11 @@
 void check_lines(char *lines)
 {
 	char *token, *token_2, *saveptr1;
-	instruction_t arr_of_opty[] = {
-		{"push", void push(stack_t **stack, unsigned int line_number)},
-		{"pall", void pall(stack_t **stack, unsigned int line_number)}
-	}
-	unsigned int line_number = 1, i, test_len = 3;
+	instruction_t arr[] = {
+		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
+		{"swap", swap}, {"add", add}, {"nop", nop}
+	};
+	unsigned int line_number = 1, i, arr_length = 2, no = 0;
 
 	token = strtok(lines, "\n");
 	while (token != NULL)
@@ -20,12 +20,24 @@ void check_lines(char *lines)
 		token_2 = (char *)strtok_r(token, " ", &saveptr1);
 		while (token_2 != NULL)
 		{
-			for (i = 0; i < test_len; i++)
+			for (i = 0; i < arr_length; i++)
 			{
-				if (!_strcp(test[i], token_2))
+				if (!_strcp(arr[i].opcode, token_2))
 				{
-					printf("%s\n", test[i]);
+					printf("%s\n", arr[i].opcode);
+					no == 1;
+					break;
 				}
+				else if (check_spaces(token_2))
+				{
+					no == 1;
+					break;
+				}
+			}
+			if (no == 1)
+			{
+				no = 0;
+				break;
 			}
 			token_2 = strtok_r(NULL, " ", &saveptr1);
 		}
@@ -58,4 +70,14 @@ int _strcp(char *a, char *b)
 			return (0);
 	}
 	return (0);
+}
+
+int check_spaces(char *a)
+{
+	while (*a == ' ')
+		a++;
+	if (*a == '\n' || *a == '\0')
+		return (1);
+	return (0);
+
 }

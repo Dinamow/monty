@@ -44,6 +44,9 @@ typedef struct instruction_s
 void handle_error_file(int fd, char *a);
 void check_lines(char *lines);
 int _strcp(char *a, char *b);
+int check_spaces(char *a);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 
 
 #endif
