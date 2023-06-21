@@ -18,9 +18,10 @@ void handle_error_file(int fd, char *a)
 }
 
 /**
- *
- *
- *
+ * handle_optcode - handels optcode errors
+ * @line_number: the number of the line
+ * @instruct: the wrong instruct
+ * Return: nothing
  */
 void handle_optcode(unsigned int line_number, char *instruct)
 {

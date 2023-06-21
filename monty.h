@@ -47,8 +47,8 @@ void handle_error_file(int fd, char *a);
 void check_lines(char *lines);
 int _strcp(char *a, char *b);
 int check_spaces(char *a);
-void handle_optcode (unsigned int line_number, char *instruct);
-void hanlde_push_number(unsigned int line_number, char *token_2);
+void handle_optcode(unsigned int line_number, char *instruct);
+void handle_push_number(unsigned int line_number, char *token_2);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 
