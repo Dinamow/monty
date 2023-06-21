@@ -1,6 +1,13 @@
 #include "monty.h"
 
-int main(int argc, char **argv) {
+/**
+ * main - execute monty code
+ * @argc: number of arguments
+ * @argv: arguments
+ * Return: 0 on success
+ */
+int main(int argc, char **argv)
+{
 	char *buff;
 	size_t size = 0;
 	int file;

@@ -1,5 +1,6 @@
 #ifndef MONTY_H
 #define MONTY_H
+#define _GNU_SOURCE
 
 #include <stdio.h>
 #include <unistd.h>
@@ -25,7 +26,7 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-extern stack_t *head;
+extern int push_num;
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
