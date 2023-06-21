@@ -47,7 +47,7 @@ void handle_optcode(unsigned int line_number, char *instruct, stack_t **head)
 {
 	_free_stack(head);
 	
-	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, instruct);
+	printf("L%u: unknown instruction %s\n", line_number, instruct);
 	free(train.buff);
 	exit(EXIT_FAILURE);
 }
