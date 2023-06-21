@@ -9,8 +9,7 @@ void check_lines(char *lines)
 {
 	char *token, *token_2, *saveptr1;
 	instruction_t arr[] = {
-		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
-		{"swap", swap}, {"add", add}, {"nop", nop}
+		{"push", push}, {"pall", pall}
 	};
 	unsigned int line_number = 1, i, arr_length = 2, no = 0;
 
@@ -18,29 +17,23 @@ void check_lines(char *lines)
 	while (token != NULL)
 	{
 		token_2 = (char *)strtok_r(token, " ", &saveptr1);
-		while (token_2 != NULL)
+		for (i = 0; i < arr_length; i++)
 		{
-			for (i = 0; i < arr_length; i++)
+			if (!_strcp(arr[i].opcode, token_2))
 			{
-				if (!_strcp(arr[i].opcode, token_2))
-				{
-					printf("%s\n", arr[i].opcode);
-					no == 1;
-					break;
-				}
-				else if (check_spaces(token_2))
-				{
-					no == 1;
-					break;
-				}
-			}
-			if (no == 1)
-			{
-				no = 0;
+				no = 1;
+				printf("%s\n", arr[i].opcode);
 				break;
 			}
-			token_2 = strtok_r(NULL, " ", &saveptr1);
 		}
+		if (check_spaces(token_2))
+			no = 1;
+		if (no == 0)
+		{
+			printf("L%u: unknown instruction %s\n", line_number, token_2);
+			exit(EXIT_FAILURE);
+		}
+		no = 0;
 		token = strtok(NULL, "\n");
 		line_number++;
 	}
@@ -72,6 +65,11 @@ int _strcp(char *a, char *b)
 	return (0);
 }
 
+/**
+ * check_spaces - check if a string is only spaces
+ * @a: string to be checked
+ * Return: 0 on failer and 1 on success
+ */
 int check_spaces(char *a)
 {
 	while (*a == ' ')

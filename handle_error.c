@@ -16,3 +16,4 @@ void handle_error_file(int fd, char *a)
 		exit(EXIT_FAILURE);
 	}
 }
+
