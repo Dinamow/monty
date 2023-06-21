@@ -1,6 +1,25 @@
 #include "monty.h"
 
 /**
+ * _free_stack - frees the stack
+ * @stack: stack's head
+ * Return: nothing
+ */
+void _free_stack(stack_t **stack)
+{
+	stack_t *current = *stack, *temp;
+
+	if (current == NULL)
+		return;
+	while (current != NULL)
+	{
+		temp = current;
+		current = current->next;
+		free(temp);
+	}
+}
+
+/**
  * handle_error_file - handles error file
  * @fd: the opeand file
  * @a: agrv[1]
@@ -27,26 +46,8 @@ void handle_error_file(int fd, char *a)
 void handle_optcode(unsigned int line_number, char *instruct, stack_t **head)
 {
 	_free_stack(head);
-	free(train.buff);
 	printf("L%u: unknown instruction %s\n", line_number, instruct);
+	free(train.buff);
 	exit(EXIT_FAILURE);
 }
 
-/**
- * _free_stack - frees the stack
- * @stack: stack's head
- * Return: nothing
- */
-void _free_stack(stack_t **stack)
-{
-	stack_t *current = *stack, *temp;
-
-	if (current == NULL)
-		return;
-	while (current != NULL)
-	{
-		temp = current;
-		current = current->next;
-		free(temp);
-	}
-}

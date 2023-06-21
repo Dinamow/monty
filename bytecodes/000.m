@@ -1,6 +1,5 @@
 push 0
 push 123
-push
 push 1  pall
 push 2
 pall
