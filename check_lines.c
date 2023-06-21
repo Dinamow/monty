@@ -18,6 +18,8 @@ void check_lines(char *lines)
 	while (token != NULL)
 	{
 		token_2 = (char *)strtok_r(token, " ", &saveptr1);
+		while (*token_2 == ' ' || *token_2 == 9)
+			token_2++;
 		for (i = 0; i < arr_length; i++)
 		{
 			if (!_strcp(arr[i].opcode, token_2))
@@ -51,8 +53,8 @@ int _strcp(char *a, char *b)
 {
 	int size_b, size = 0;
 
-	while (*a == ' ')
-		a++;
+	while (*b == ' ' || *b == 9)
+		b++;
 	size_b = strlen(b);
 	while (*a)
 	{
@@ -81,3 +83,4 @@ int check_spaces(char *a)
 	return (0);
 
 }
+
