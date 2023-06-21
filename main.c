@@ -1,5 +1,5 @@
 #include "monty.h"
-
+train_t train = {NULL, 0};
 /**
  * main - execute monty code
  * @argc: number of arguments
@@ -29,6 +29,7 @@ int main(int argc, char **argv)
 	}
 	size = read(file, buff, st.st_size - 1);
 	buff[size] = '\0';
+	train.buff = buff;
 	close(file);
 	check_lines(buff);
 	free(buff);

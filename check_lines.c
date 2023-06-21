@@ -8,8 +8,8 @@
 void check_lines(char *lines)
 {
 	char *token, *token_2, *saveptr1, *temp;
-	unsigned int line_number = 1, i, arr_length = 2, no = 0;
 	stack_t *head = NULL;
+	unsigned int line_number = 1, i, arr_length = 2, no = 0;
 	instruction_t arr[] = {
 		{"push", push}, {"pall", pall}
 	};
@@ -24,7 +24,7 @@ void check_lines(char *lines)
 			{
 				temp = strtok_r(NULL, " ", &saveptr1);
 				if (i == 0)
-					handle_push_number(line_number, temp);
+					handle_push_number(line_number, temp, &head);
 				arr[i].f(&head, line_number);
 				no = 1;
 				break;
@@ -33,11 +33,12 @@ void check_lines(char *lines)
 		if (check_spaces(token_2))
 			no = 1;
 		if (no == 0)
-			handle_optcode(line_number, token_2);
+			handle_optcode(line_number, token_2, &head);
 		no = 0;
 		token = strtok(NULL, "\n");
 		line_number++;
 	}
+	_free_stack(&head);
 }
 
 /**

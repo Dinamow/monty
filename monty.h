@@ -11,8 +11,6 @@
 #include <fcntl.h>
 #include <ctype.h>
 
-extern int push_num;
-
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -28,6 +26,22 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
+
+/**
+ * struct train_s - hold things to be freed or closed
+ * @buff: the content of monty file
+ * @push_num: number to be pushed
+ *
+ *Description: holdes values to be freed
+ */
+typedef struct train_s
+{
+	char *buff;
+	int push_num;
+} train_t;
+
+extern train_t train;
+
 
 /**
  * struct instruction_s - opcode and its function
@@ -47,8 +61,10 @@ void handle_error_file(int fd, char *a);
 void check_lines(char *lines);
 int _strcp(char *a, char *b);
 int check_spaces(char *a);
-void handle_optcode(unsigned int line_number, char *instruct);
-void handle_push_number(unsigned int line_number, char *token_2);
+void handle_optcode(unsigned int line_number, char *instruct, stack_t **head);
+void handle_push_number(unsigned int line_number, char *token_2,
+		stack_t **head);
+void _free_stack(stack_t **stack);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 

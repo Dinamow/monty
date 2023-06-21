@@ -21,11 +21,32 @@ void handle_error_file(int fd, char *a)
  * handle_optcode - handels optcode errors
  * @line_number: the number of the line
  * @instruct: the wrong instruct
+ * @head: pointer to head
  * Return: nothing
  */
-void handle_optcode(unsigned int line_number, char *instruct)
+void handle_optcode(unsigned int line_number, char *instruct, stack_t **head)
 {
+	_free_stack(head);
+	free(train.buff);
 	printf("L%u: unknown instruction %s\n", line_number, instruct);
 	exit(EXIT_FAILURE);
 }
 
+/**
+ * _free_stack - frees the stack
+ * @stack: stack's head
+ * Return: nothing
+ */
+void _free_stack(stack_t **stack)
+{
+	stack_t *current = *stack, *temp;
+
+	if (current == NULL)
+		return;
+	while (current != NULL)
+	{
+		temp = current;
+		current = current->next;
+		free(temp);
+	}
+}
