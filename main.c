@@ -1,69 +1,29 @@
 #include "monty.h"
-/**
- * main - start point
- * @argc: input
- * @argv: input
- * @env: input
- *
- * Return: int
- */
-int main(int argc, char **argv)
-{
-	int fd, len;
+
+int main(int argc, char **argv) {
 	char *buff;
-	FILE *f;
-	size_t size;
+	size_t size = 0;
+	int file;
+	struct stat st;
 
 	if (argc != 2)
-		write(STDERR_FILENO, "USAGE: monty file\n", 18), exit(EXIT_FAILURE);
-	fd = open(argv[1], O_RDONLY);
-	handle_err(fd, argv[1], 0);
-	f = fopen(argv[1], "r");
-	fseek(f, 0, SEEK_END);
-	len = ftell(f);
-	fclose(f);
-	buff = malloc(len);
-	size = read(fd, buff, len);
-	close(fd);
-	size += 1;
-	printf("%s\n", buff);
+	{
+		write(STDERR_FILENO, "USAGE: monty file\n", 18);
+		exit(EXIT_FAILURE);
+	}
+	file = open(argv[1], O_RDONLY);
+	handle_error_file(file, argv[1]);
+	stat(argv[1], &st);
+	buff = malloc(st.st_size);
+	if (buff == NULL)
+	{
+		write(STDERR_FILENO, "Error: malloc failed\n", 21);
+		exit(EXIT_FAILURE);
+	}
+	size = read(file, buff, st.st_size - 1);
+	buff[size] = '\0';
+	close(file);
+	check_lines(buff);
 	free(buff);
 	return (0);
-	
 }
-
-/**
- * handle_err - handle some errors
- * @fd: input
- * @a: input
- * @c: input
- *
- * Return: nothing
- */
-void handle_err(int fd, char *a, int c)
-{
-	switch (c)
-	{
-		case 0:
-		{
-			if (fd < 0)
-			{
-				write(STDERR_FILENO, "Error: Can't open file", 22);
-				write(STDERR_FILENO, a, (sizeof(a))); /*problem here with bytes num*/
-				write(STDERR_FILENO, "\n", 1);
-				exit(EXIT_FAILURE);
-			}
-			else
-				return;
-		}
-		case 1:
-			exit(EXIT_FAILURE);
-		case 2:
-			exit(EXIT_FAILURE);
-		case 3:
-			exit(EXIT_FAILURE);
-		default:
-			return;
-	}
-}
-
