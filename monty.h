@@ -9,6 +9,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <ctype.h>
+
+extern int push_num;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -26,7 +29,6 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-extern int push_num;
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -45,6 +47,8 @@ void handle_error_file(int fd, char *a);
 void check_lines(char *lines);
 int _strcp(char *a, char *b);
 int check_spaces(char *a);
+void handle_optcode (unsigned int line_number, char *instruct);
+void hanlde_push_number(unsigned int line_number, char *token_2);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 

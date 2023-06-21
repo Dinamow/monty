@@ -17,3 +17,14 @@ void handle_error_file(int fd, char *a)
 	}
 }
 
+/**
+ *
+ *
+ *
+ */
+void handle_optcode(unsigned int line_number, char *instruct)
+{
+	printf("L%u: unknown instruction %s\n", line_number, instruct);
+	exit(EXIT_FAILURE);
+}
+

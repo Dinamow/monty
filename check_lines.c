@@ -7,12 +7,13 @@
  */
 void check_lines(char *lines)
 {
-	char *token, *token_2, *saveptr1;
+	char *token, *token_2, *saveptr1, *temp;
+	unsigned int line_number = 1, i, arr_length = 2, no = 0;
+	stack_t *head = NULL;	
 	instruction_t arr[] = {
 		{"push", push}, {"pall", pall}
 	};
-	unsigned int line_number = 1, i, arr_length = 2, no = 0;
-
+	
 	token = strtok(lines, "\n");
 	while (token != NULL)
 	{
@@ -21,18 +22,18 @@ void check_lines(char *lines)
 		{
 			if (!_strcp(arr[i].opcode, token_2))
 			{
+				temp = strtok_r(NULL, " ", &saveptr1);
+				if (i == 0)
+					hanlde_push_number(line_number, temp);
+				arr[i].f(&head, line_number);
 				no = 1;
-				printf("%s\n", arr[i].opcode);
 				break;
 			}
 		}
 		if (check_spaces(token_2))
 			no = 1;
 		if (no == 0)
-		{
-			printf("L%u: unknown instruction %s\n", line_number, token_2);
-			exit(EXIT_FAILURE);
-		}
+			handle_optcode(line_number, token_2);	
 		no = 0;
 		token = strtok(NULL, "\n");
 		line_number++;
