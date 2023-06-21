@@ -10,25 +10,26 @@
 void handle_push_number(unsigned int line_number, char *token_2,
 		stack_t **head)
 {
-	int i = 0;
+	int i = 0, go = 0;
 
 	if (token_2 == NULL)
-	{
-		_free_stack(head);
-		free(train.buff);
-		printf("L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
+		go = 1;
 	for (i = 0; token_2[i] != '\0'; i++)
 	{
 		if (!isdigit(token_2[i]))
 		{
-			_free_stack(head);
-			free(train.buff);
-			printf("L%u: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
+			go = 1;
+			break;
 		}
 	}
+	if (go == 1)
+	{
+		_free_stack(head);
+		free(train.buff);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	go = 0;
 	train.push_num = atoi(token_2);
 }
 
@@ -46,7 +47,7 @@ void push(stack_t **stack, unsigned int line_number)
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
-		printf("Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	else
