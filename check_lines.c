@@ -9,10 +9,11 @@ void check_lines(char *lines)
 {
 	char *token, *token_2, *saveptr1, *temp;
 	stack_t *head = NULL;
-	unsigned int line_number = 1, i, arr_length = 8, no = 0;
+	unsigned int line_number = 1, i, arr_length = 11, no = 0;
 	instruction_t arr[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
-		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub}
+		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub},
+		{"div", _div}, {"mul", _mul}, {"mod", _mod}
 	};
 
 	token = strtok(lines, "\n");
