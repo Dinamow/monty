@@ -20,8 +20,12 @@ void check_lines(char *lines)
 	while (token != NULL)
 	{
 		token_2 = (char *)strtok_r(token, " ", &saveptr1);
-		while (*token_2 == ' ' || *token_2 == 9)
-			token_2++;
+		if (token_2 == NULL)
+		{
+			token = strtok(NULL, "\n"), line_number++;
+			continue;
+
+		}
 		for (i = 0; i < arr_length; i++)
 		{
 			if (!_strcp(arr[i].opcode, token_2))
