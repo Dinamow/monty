@@ -51,7 +51,7 @@ void swap(stack_t **stack, unsigned int line_number)
 /**
  * add - start point
  * @stack: input
- * @line_number
+ * @line_number: input
  *
  * Return: nothing
  */
