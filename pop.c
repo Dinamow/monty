@@ -71,4 +71,14 @@ void add(stack_t **stack, unsigned int line_number)
 	pop(stack, line_number);
 	(*stack)->n += temp;
 }
-
+/**
+ * nop - nothing to do
+ * @stack: input
+ * @line_number: input
+ *
+ * Return: nothing
+ */
+void nop(stack_t **stack, unsigned int line_number)
+{
+	return;
+}
