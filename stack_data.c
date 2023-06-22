@@ -13,13 +13,18 @@ void handle_push_number(unsigned int line_number, char *token_2,
 	int i = 0, go = 0;
 
 	if (token_2 == NULL)
-		go = 1;
-	for (i = 0; token_2[i] != '\0'; i++)
 	{
-		if (!isdigit(token_2[i]))
+		go = 1;
+	}
+	else
+	{
+		for (i = 0; token_2[i] != '\0'; i++)
 		{
-			go = 1;
-			break;
+			if (!isdigit(token_2[i]))
+			{
+				go = 1;
+				break;
+			}
 		}
 	}
 	if (go == 1)
@@ -41,7 +46,7 @@ void handle_push_number(unsigned int line_number, char *token_2,
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new, *current = *stack;
+	stack_t *new;
 
 	(void) line_number;
 	new = malloc(sizeof(stack_t));
@@ -50,21 +55,19 @@ void push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
+	new->n = train.push_num;
+	new->prev = NULL;
+
+	if (*stack == NULL)
+	{
+		new->next = NULL;
+		*stack = new;
+	}
 	else
 	{
-		if (current != NULL)
-		{
-			while (current->next != NULL)
-				current = current->next;
-			current->next = new;
-		}
-		else
-		{
-			*stack = new;
-		}
-		new->n = train.push_num;
-		new->prev = current;
-		new->next = NULL;
+		new->next = *stack;
+		(*stack)->prev = new;
+		*stack = new;
 	}
 }
 
@@ -81,14 +84,10 @@ void pall(stack_t **stack, unsigned int line_number)
 	(void) line_number;
 	if (*stack == NULL)
 		return;
-	while (current->next != NULL)
-	{
-		current = current->next;
-	}
 	while (current != NULL)
 	{
 		printf("%d\n", current->n);
-		current = current->prev;
+		current = current->next;
 	}
 }
 
@@ -110,10 +109,6 @@ void pint(stack_t **stack, unsigned int line_number)
 		free(train.buff);
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
-	}
-	while (current->next != NULL)
-	{
-		current = current->next;
 	}
 	printf("%d\n", current->n);
 }
