@@ -78,7 +78,9 @@ void add(stack_t **stack, unsigned int line_number)
  *
  * Return: nothing
  */
-void nop(void)
+void nop(stack_t **stack, unsigned int line_number)
 {
-	return;
+	line_number += line_number * 2;
+	*stack = (*stack)->next;
+	*stack = (*stack)->prev;
 }
