@@ -92,3 +92,28 @@ void pall(stack_t **stack, unsigned int line_number)
 	}
 }
 
+
+/**
+ * pint - print all elements of a stack
+ * @stack: pointer to head
+ * @line_number: line's number
+ * Return: nothing
+ */
+void pint(stack_t **stack, unsigned int line_number)
+{
+	
+	stack_t *current = *stack;
+
+	if (*stack == NULL)
+	{
+		_free_stack(stack);
+		free(train.buff);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	while (current->next != NULL)
+	{
+		current = current->next;
+	}
+	printf("%d\n", current->n);
+}
