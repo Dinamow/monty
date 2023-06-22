@@ -80,7 +80,6 @@ void add(stack_t **stack, unsigned int line_number)
  */
 void nop(stack_t **stack, unsigned int line_number)
 {
-	line_number += line_number * 2;
-	*stack = (*stack)->next;
-	*stack = (*stack)->prev;
+	(void) line_number;
+	(void) *stack;
 }
