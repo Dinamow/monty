@@ -18,11 +18,11 @@ void handle_push_number(unsigned int line_number, char *token_2,
 	}
 	else
 	{
-		for(i = 0; token_2[i] != '\0'; i++)
+		for (i = 0; token_2[i] != '\0'; i++)
 		{
-			if(token_2[0] == '-' && isdigit(token_2[i + 1]))
+			if (token_2[0] == '-' && isdigit(token_2[i + 1]))
 				continue;
-			if(!isdigit(token_2[i]))
+			if (!isdigit(token_2[i]))
 			{
 				go = 1;
 				break;
