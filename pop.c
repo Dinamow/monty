@@ -48,3 +48,27 @@ void swap(stack_t **stack, unsigned int line_number)
 	current->n = (*stack)->n;
 	(*stack)->n = temp;
 }
+/**
+ * add - start point
+ * @stack: input
+ * @line_number
+ *
+ * Return: nothing
+ */
+void add(stack_t **stack, unsigned int line_number)
+{
+	int temp;
+	stack_t *current = *stack;
+
+	if (*stack == NULL || current->next == NULL)
+	{
+		_free_stack(stack);
+		free(train.buff);
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp = current->n;
+	pop(stack, line_number);
+	(*stack)->n += temp;
+}
+
