@@ -10,7 +10,7 @@
 void handle_push_number(unsigned int line_number, char *token_2,
 		stack_t **head)
 {
-	int i = 0, go = 0;
+	int go = 0;
 
 	if (token_2 == NULL)
 	{
@@ -18,14 +18,8 @@ void handle_push_number(unsigned int line_number, char *token_2,
 	}
 	else
 	{
-		for (i = 0; token_2[i] != '\0'; i++)
-		{
-			if (!isdigit(token_2[i]))
-			{
-				go = 1;
-				break;
-			}
-		}
+		if (atoi(token_2) == 0 && token_2[0] != '0')
+			go = 1;
 	}
 	if (go == 1)
 	{

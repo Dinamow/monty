@@ -86,7 +86,7 @@ void nop(stack_t **stack, unsigned int line_number)
 /**
  * sub - start point
  * @stack: input
- * @line_number
+ * @line_number: number of lines
  *
  * Return: void
  */
